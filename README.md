@@ -66,7 +66,7 @@ Line 9:   This line removes any temporary files created by the flushtest script.
 -------------------------------------------------------------------------------
 
 
-Programming Assignment #2
+# Programming Assignment #2
 
 	#!/usr/bin/tcsh
  
@@ -234,7 +234,7 @@ And that is the end of your script. You will notice that there is no output for
 garbage hands (ie, hands that have no matches or straights or flushes).
 
 -------------------------------------------------------------------------------
-Programming Assignment #3、4
+# Programming Assignment #3、4
 
 In this homework, you will write a cshell script to deal and score a poker hand.
 
@@ -445,7 +445,7 @@ any way that you want, but only using commands from lectures 1-4
 #garbage hands (ie, hands that have no matches or straights or flushes).
 
 -------------------------------------------------------------------------------
-Programming Assignment #5
+# Programming Assignment #5
 Two part 
 Part 1: must use only sed commands we learned in lecture 8.It prints the 5 cards in the 
 hand and detects if they are either a Flush or Four of a kind. You will notice that it 
@@ -567,7 +567,7 @@ file. The following ________ will produce a sed program to print those lines.
 	rm nums
 
 -------------------------------------------------------------------------------
-Programming Assignment #6
+# Programming Assignment #6
 
 Let's look at the provided files:
 
