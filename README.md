@@ -266,7 +266,9 @@ You can never use "&&".
 You can never create any files.
 You must complete each line listed below in a single line of your script.
 
-Line 1:  #!/usr/bin/tcsh
+Line 1:  
+
+	#!/usr/bin/tcsh
          (In your computer, it might be #!/bin/tcsh.)
   
 Line 2: This creates an array of 13 zeroes (ie, '0').
@@ -308,6 +310,7 @@ Line 7: This uses the idea that i%13 will be a number between 0 and 12 (which
 
 Line 8: This line prints the card. It does not use color (unlike the earlier
         homeworks). It has this format:
+	
            echo -n \  `echo  _1_ | grep _2_ | cut _3_ | tr _4_ || expr _5_`$_6_
 
            where:
@@ -399,6 +402,7 @@ Lines 27-28:
                      matching the whole string, which is not what you want.
 
 Lines 29-30:
+
         if ( `__1__`  == '1 1 1 1 1' ) then
             echo Straight$flush!
 
@@ -407,6 +411,7 @@ Lines 29-30:
                elements, and see if they are all 1.
 
 Lines 31-33: (Copy these lines as-is)
+
         else if ( $flush != "" ) then
             echo Flush!
         else
@@ -451,31 +456,35 @@ then it will make sense. 3) The real way that the game would really be played is
 on the last line of the screenshot: "sort -R allcards | head -5 | sort -g" -- which 
 doesn't require the use of any sed.
 
-#!________________
-# The above line defines the path to sed and the flags to sed
+	!________________
+The above line defines the path to sed and the flags to sed
 
-#The following lines print a pretty card (meaning that everything except for
-#the first 2 characters is printed). These lines also take those first two
-#characters and append them onto the end of the hold space.
+The following lines print a pretty card (meaning that everything except for
+the first 2 characters is printed). These lines also take those first two
+characters and append them onto the end of the hold space.
 
- .
- .    <= lines go here
- .
+	 .
+	 .    <= lines go here
+	 .
 
-#The following line loads the hold space into the pattern space:
-____
+The following line loads the hold space into the pattern space:
 
-#The following _____ is a single pattern that detects any flush:
-s/____/Flush/p
+	____
 
-#The following ____ pattern detects if the last 4 cards all have the same face:
-s/____/Four of a kind/p
+The following _____ is a single pattern that detects any flush:
 
-#The following ____ pattern detects if the first 4 cards have the same face:
-s/____/Four of a kind/p
+	s/____/Flush/p
 
-# Note that the input file will always be sorted based on the face. This is
-# why the above only needed to check for two cases (ie, first 4 & last 4).
+The following ____ pattern detects if the last 4 cards all have the same face:
+
+	s/____/Four of a kind/p
+
+The following ____ pattern detects if the first 4 cards have the same face:
+
+	s/____/Four of a kind/p
+
+Note that the input file will always be sorted based on the face. This is
+why the above only needed to check for two cases (ie, first 4 & last 4).
 <img width="958" alt="UNIXPA5a" src="https://github.com/cindy-lai0202/Unix/assets/72913466/bfbe8960-19ed-4b7d-b786-c440350df515">
 
 
@@ -486,80 +495,82 @@ rename the file to "tester.csh", then make it an executable.
 
 <img width="947" alt="testeroutput" src="https://github.com/cindy-lai0202/Unix/assets/72913466/fa899ee0-c1bb-49b4-937e-b37ee2d685bc">
 
-#!/usr/bin/csh
-@ f = _______ # Use seq, sort & head to create a random number between 1 and 13
+	!/usr/bin/csh
+	@ f = _______ # Use seq, sort & head to create a random number between 1 and 13
+	
+	./topface $f
+	switch ( $1 )
+	   case "[Rr]*":
+	      cat allcards | sort -R | sed ______ # prints first 5 lines
+	      exit
+	   case "[Ff]*":
+	      @ suit = ___ #Use seq, sort & head to randomly choose from 1, 14, 27 & 40
+	
+	      #Now, the value of "suit" is the line number of "allcards" on which one
+	      #suit begins. And the next 12 lines of "allcards" will also be that suit.
+	
+	      cat allcards | sed -n ______ | sort -R | sed 5q
+	      #The above _____ is a sed program to select the 13 lines of the "suit".
+	      #This must be achieved using expr, and using sed's "," range operator.
+	      exit
+	   case "[Ss]*":
+	      @ f = ___ # Use seq, sort & head to create a random number from 1 and 8
+	      set h
+	      foreach i ( `seq 0 4`)
+	         @ suit = __________ # This is the same as the earlier "@ suit =" line. 
+	         set h = ( $h ____ ) # Add next card to the straight, using above suit. 
+	      end
+	      echo $h | tr " " "\n" | sort -R > nums
+	      breaksw
+	   case "4*":
+	      cat topdeck | sed 5q > nums
+	      breaksw
+	   case "3*":
+	      cat topdeck | sed 1d\;6q > nums
+	      breaksw
+	   case "2*":
+	      cat topdeck | sed 3,7\!d > nums
+	      breaksw
+	   case "1*":
+	      cat topdeck | sed 1,3d > nums
+	      breaksw
+	   case "[Hh]*":
+	      cat topdeck | sed -n 3p > nums
+	   case "[Pp]*":
+	      cat topdeck | sed 2q >> nums
+	      @ f2 = `cat topdeck | sed 5\!\d | xargs expr 0 - 1 +` % 13 + 1
+	      ./topface $f2
+	      cat topdeck | sed 2q >> nums
+	      @ f3 = `cat topdeck | sed 5\!\d | xargs expr 0 - 1 +` % 13 + 1
+	      if ( $f3 != $f ) cat topdeck | sed 5\!d >> nums
+	      if ( $f3 == $f ) cat topdeck | sed 6\!d >> nums
+	      breaksw
+	   default:
+	      echo "This program is meant to receive one argument:"
+	      echo '  (R) Random'
+	      echo '  (F) Flush'
+	      echo '  (S) Straight'
+	      echo '  (H) Full House'
+	      echo '  (P) Two Pair'
+	      echo '  (4) Four of a kind'
+	      echo '  (3) Three of a kind'
+	      echo '  (2) Two of a kind (ie, 1 pair)'
+	      echo '  (1) "One" of a kind (ie, no matching cards)'
+	      echo
+	      exit
+	endsw
 
-./topface $f
-switch ( $1 )
-   case "[Rr]*":
-      cat allcards | sort -R | sed ______ # prints first 5 lines
-      exit
-   case "[Ff]*":
-      @ suit = ___ #Use seq, sort & head to randomly choose from 1, 14, 27 & 40
+The first 5 lines of the "nums" file represent line numbers in the "allcards"
+file. The following ________ will produce a sed program to print those lines.
 
-      #Now, the value of "suit" is the line number of "allcards" on which one
-      #suit begins. And the next 12 lines of "allcards" will also be that suit.
-
-      cat allcards | sed -n ______ | sort -R | sed 5q
-      #The above _____ is a sed program to select the 13 lines of the "suit".
-      #This must be achieved using expr, and using sed's "," range operator.
-      exit
-   case "[Ss]*":
-      @ f = ___ # Use seq, sort & head to create a random number from 1 and 8
-      set h
-      foreach i ( `seq 0 4`)
-         @ suit = __________ # This is the same as the earlier "@ suit =" line. 
-         set h = ( $h ____ ) # Add next card to the straight, using above suit. 
-      end
-      echo $h | tr " " "\n" | sort -R > nums
-      breaksw
-   case "4*":
-      cat topdeck | sed 5q > nums
-      breaksw
-   case "3*":
-      cat topdeck | sed 1d\;6q > nums
-      breaksw
-   case "2*":
-      cat topdeck | sed 3,7\!d > nums
-      breaksw
-   case "1*":
-      cat topdeck | sed 1,3d > nums
-      breaksw
-   case "[Hh]*":
-      cat topdeck | sed -n 3p > nums
-   case "[Pp]*":
-      cat topdeck | sed 2q >> nums
-      @ f2 = `cat topdeck | sed 5\!\d | xargs expr 0 - 1 +` % 13 + 1
-      ./topface $f2
-      cat topdeck | sed 2q >> nums
-      @ f3 = `cat topdeck | sed 5\!\d | xargs expr 0 - 1 +` % 13 + 1
-      if ( $f3 != $f ) cat topdeck | sed 5\!d >> nums
-      if ( $f3 == $f ) cat topdeck | sed 6\!d >> nums
-      breaksw
-   default:
-      echo "This program is meant to receive one argument:"
-      echo '  (R) Random'
-      echo '  (F) Flush'
-      echo '  (S) Straight'
-      echo '  (H) Full House'
-      echo '  (P) Two Pair'
-      echo '  (4) Four of a kind'
-      echo '  (3) Three of a kind'
-      echo '  (2) Two of a kind (ie, 1 pair)'
-      echo '  (1) "One" of a kind (ie, no matching cards)'
-      echo
-      exit
-endsw
-
-# The first 5 lines of the "nums" file represent line numbers in the "allcards"
-# file. The following ________ will produce a sed program to print those lines.
-sed -n `head -5 nums|sed _______________________________` allcards
-rm nums
+	sed -n `head -5 nums|sed _______________________________` allcards
+	rm nums
 
 -------------------------------------------------------------------------------
 Programming Assignment #6
 
 Let's look at the provided files:
+
     % ls
     DatabaseAndLogExpected                   README
     QuantumQuest:_A_ChatGPT_Space_Adventure  testawk.sh
@@ -570,6 +581,7 @@ Also, you can see that I have given you an Expected output file.
 And I have given you a test script to check your answer with.
 
 Aside from this README file, there one more file, a big text file:
+
     % wc -c QuantumQuest:_A_ChatGPT_Space_Adventure
       206634 QuantumQuest:_A_ChatGPT_Space_Adventure
     %
@@ -618,6 +630,7 @@ I also asked it generate some Captain's Log Entries.
 
 We can see what those entries are by looking at just the Entry Names
 in the provided DatabaseAndLogExpected file:
+
     % grep '^[CD]a.* [LE]' DatabaseAndLogExpected|sort
     Captain's Log - Mission Day 113, Supplemental 2:
     Captain's Log - Mission Day 113, Supplemental:
@@ -653,6 +666,7 @@ in the provided DatabaseAndLogExpected file:
 The idea of the database file is that I can easily have chatGPT write
 code to display individual entries. For example, here is how easy it
 is to display a specific entry in sed:
+
     % cat DatabaseAndLogExpected | sed -n '/Weapons/,/--/p;1i\\t'
 
     Database Entry: Weapons System:
@@ -682,6 +696,7 @@ So the job of your awk script is to clean up the chatGPT output.
 
 To begin understanding how we will do that, let's look at the script
 I gave you for testing:
+
      % cat testawk.sh
      cat QuantumQuest:_A_ChatGPT_Space_Adventure | \
          awk -f PA6.awk | uniq | \
@@ -697,6 +712,7 @@ I gave you for testing:
      %
 
 From the above see that if first does this:
+
      cat QuantumQuest:_A_ChatGPT_Space_Adventure | awk -f PA6.awk|...
 
 So your PA6 soultion is an awk script that runs directly on the
@@ -704,6 +720,7 @@ QuantumQuest:_A_ChatGPT_Space_Adventure file.
 
 
 Next, we notice that the PA6,awk output gets a little more clean-up:
+
          ...
          awk -f PA6.awk | uniq | \
          sed 's/[[]Insert Ship Name]/Fortune Céleste/'>DatabaseAndLog
@@ -720,6 +737,7 @@ gave you the tester.sh script that uses sed to fix it, as you see
 above.
 
 Now let's look at the rest of the test script:
+
      % tail -8 testawk.sh
      
      sort DatabaseAndLog > sortedDatabaseAndLog
@@ -759,12 +777,14 @@ Line 2. This uses the next() function to skip over this input line, if the
         a useless "End of Database Entry" line.
 
 Line 3. The database entry for Dylithium is a little-bit wrongly formatted:
+
            % cat QuantumQuest:_A_ChatGPT_Space_Adventure | sed -n 448p
            Ship's Database - Dilithium
            %
          Line 3 changes it into: "Database Entry: Dilithium:"
 
 Line 4. The database for the hybernation and weapons systems are illformated:
+
            % cat QuantumQuest\:_A_ChatGPT_Space_Adventure| sed -n '987,989p' |\
            ? sed 's/\(.\{60\}\).*/\1.../'
            Deep Space Hibernation: The deep space hibernation system al...
