@@ -81,6 +81,7 @@ Programming Assignment #2
 #of commands, and you may use "&&" and "||". So, for example, if you saw:
 
 	__________________ echo forexample
+ 
 #Then something must go before the "echo" that would not break UNIX syntax.
 #So it could be "... | echo forexample" or "... | xargs echo forexample" or
 #"... || echo forexample" or "... && echo forexample". (But not "...; echo",
@@ -109,6 +110,7 @@ Programming Assignment #2
 #In PA2, however, we now know about command coordination with || and &&. This
 #will allow us to only print "Flush!" if there is a "5" in the tempfile. So,
 #on the following line you must achieve printing Flush! using only fgrep & echo:
+
 	_______________________________ echo Flush!  <= Your job is to fill in the blank
 
 #That is the end of the section that is like PA1. Now for the new behavior:
@@ -121,6 +123,7 @@ Programming Assignment #2
 
 #Not clear? Then consider the following example, where I have already run the
 #two lines to create the faces file:
+
 	% basename `pwd`
 	sample1
 	% ls
@@ -138,6 +141,7 @@ Programming Assignment #2
 
 #As I said above, you will need 2 lines of code to accomplish this. The first
 #line is for all cards from 2 to 9:
+
 	____________________________ > faces   <= Fill in the blank
 
 #The second line is for the ten, jack, queen, king and ace. This line is harder,
@@ -149,6 +153,7 @@ Programming Assignment #2
 #and that does not give us many ways to put something in from of each line of
 #input. The answer is to use "cat -n" to put a "\t" in front of each line (along
 #with some other things that "cat -n" will insert, but that you can then remove.
+
 	____________________________ >> faces  <= Fill in the blank
 
 #Now that we have a list of faces, we can analyze which cards match each other.
@@ -167,31 +172,37 @@ Programming Assignment #2
 # No matches (ie, either a flush or garbage)   Five lines: all '1'
 #
 # So put that line here. (Hint: uniq -c)
-____________________________  > facecounts  <= Fill in the blank
+
+	____________________________  > facecounts  <= Fill in the blank
 
 # The next line controls whether to print "One pair!"
 # Hint: In this case facecounts would have 4 lines.
 # Hint: expr understands the "==" operator.
+
 	_______________________________ echo One pair! <= Fill in the blank
 
 # The next line controls whether to print "Two pair!"
 # Hint: In this case facecounts would have 3 lines. <= But so would 3-of-a-kind
 # Hint: facecounts would have a '2'
+
 	_______________________________ echo Two pair!  <= Fill in the blank
 
 # The next line controls whether to print "Three of a kind!"
 # Hint: In this case facecounts would have 3 lines. <= But so would 2-pair
 # Hint: facecounts would have a '3'
+
 	_______________________________ echo Three of a kind! <= Fill in the blank
 
 # The next line controls whether to print "Four of a kind!"
 # Hint: In this case facecounts would have 2 lines. <= But so would full-house
 # Hint: facecounts would have a '4'
+
 	_______________________________ echo Four of a kind! <= Fill in the blank
 
 # The next line controls whether to print "Full house!"
 # Hint: In this case facecounts would have 2 lines. <= But so would 4-of-a-kind
 # Hint: facecounts would have a '3'
+
 	_______________________________ echo Full house! <= Fill in the blank
 
 # The next line controls whether to print "Straight!" (which means that all of)
@@ -206,10 +217,12 @@ ____________________________  > facecounts  <= Fill in the blank
 # in order to test whether the value difference between the high card and low
 # the card is 4. In that case, you have a straight.
 # Q: "Do I have to use expr, ``, sort, tail, and head?"  A: "Yes."
+
 	_______________________________ echo Straight! <= Fill in the blank
 
 #This final line handles the ace-low straight (14, 2, 3, 4, 5). Implement it
 #any way that you want, but only using commands from lectures 1-4 
+
 	_______________________________ echo Straight! <= Fill in the blank
 	
 #And that is the end of your script. You will notice that there is no output for
