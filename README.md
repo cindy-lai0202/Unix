@@ -79,7 +79,7 @@ Programming Assignment #2
 #In this assignment: only use commands from Lectures 1-4, and don't use any ";".
 #When filling in the blanks indicated below, you may use any piping sequence
 #of commands, and you may use "&&" and "||". So, for example, if you saw:
-	__________________ echo forexample
+                __________________ echo forexample
 #Then something must go before the "echo" that would not break UNIX syntax.
 #So it could be "... | echo forexample" or "... | xargs echo forexample" or
 #"... || echo forexample" or "... && echo forexample". (But not "...; echo",
@@ -89,7 +89,7 @@ Programming Assignment #2
 
 #PA1 line #1
 #This was PA2. But for PA2, you must use the first parameter, not $*.
-	cd ____  <= Your job is to fill in the blank
+          cd ____  <= Your job is to fill in the blank
 
 #PA1 lines #2-6
 #The next 5 lines are the same in PA2 as they were in PA1 (so copy these lines):
