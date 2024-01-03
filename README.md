@@ -162,11 +162,10 @@ Programming Assignment #2
 #Now that we have a list of faces, we can analyze which cards match each other.
 #To this end, we wish to create a file, facecounts, that contains a list of
 #numbers, 1 number per line. If we add these numbers, they always add up to 5.
-#
+
 #Not clear? Here are all of the cases (in each case line order is unimportant).
-#
-# If you had:                                  Then facecounts will have:
-# ------------------------------------------   -------------------------------
+
+If you had:                                  Then facecounts will have:
 
 	4-of-a-kind (eg 4 fives + 1 side card)       Two lines: a '4' and a '1'
 	3-of-a-kind (eg 3 tens + 2 side cards)       Three lines: a '3' and two '1'
@@ -174,38 +173,38 @@ Programming Assignment #2
 	2-pair (eg 2 aces + 2 twos + 1 side card)    Three lines: a '1' and two '2'
 	Full-house (eg 2 fives + 3 kings)            Two lines: a '2' and a '3'
 	No matches (ie, either a flush or garbage)   Five lines: all '1'
-
-# So put that line here. (Hint: uniq -c)
+ 
+So put that line here. (Hint: uniq -c)
 
 	____________________________  > facecounts  <= Fill in the blank
 
-# The next line controls whether to print "One pair!"
-# Hint: In this case facecounts would have 4 lines.
-# Hint: expr understands the "==" operator.
+The next line controls whether to print "One pair!"
+Hint: In this case facecounts would have 4 lines.
+Hint: expr understands the "==" operator.
 
 	_______________________________ echo One pair! <= Fill in the blank
 
-# The next line controls whether to print "Two pair!"
-# Hint: In this case facecounts would have 3 lines. <= But so would 3-of-a-kind
-# Hint: facecounts would have a '2'
+The next line controls whether to print "Two pair!"
+Hint: In this case facecounts would have 3 lines. <= But so would 3-of-a-kind
+Hint: facecounts would have a '2'
 
 	_______________________________ echo Two pair!  <= Fill in the blank
 
-# The next line controls whether to print "Three of a kind!"
-# Hint: In this case facecounts would have 3 lines. <= But so would 2-pair
-# Hint: facecounts would have a '3'
+The next line controls whether to print "Three of a kind!"
+Hint: In this case facecounts would have 3 lines. <= But so would 2-pair
+Hint: facecounts would have a '3'
 
 	_______________________________ echo Three of a kind! <= Fill in the blank
 
-# The next line controls whether to print "Four of a kind!"
-# Hint: In this case facecounts would have 2 lines. <= But so would full-house
-# Hint: facecounts would have a '4'
+The next line controls whether to print "Four of a kind!"
+Hint: In this case facecounts would have 2 lines. <= But so would full-house
+Hint: facecounts would have a '4'
 
 	_______________________________ echo Four of a kind! <= Fill in the blank
 
-# The next line controls whether to print "Full house!"
-# Hint: In this case facecounts would have 2 lines. <= But so would 4-of-a-kind
-# Hint: facecounts would have a '3'
+The next line controls whether to print "Full house!"
+Hint: In this case facecounts would have 2 lines. <= But so would 4-of-a-kind
+Hint: facecounts would have a '3'
 
 	_______________________________ echo Full house! <= Fill in the blank
 
