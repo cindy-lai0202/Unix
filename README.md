@@ -1,4 +1,4 @@
-Programming Assignment #1
+# Programming Assignment #1
 displaying cards and identifying whether your cards are all the same suit, which is called a "flush".
 
 Line 1: Change the directory to the place indicated by the passed-in argument.
