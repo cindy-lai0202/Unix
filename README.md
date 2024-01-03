@@ -1,2 +1,2 @@
 # Unix
-Unic lecture program assignment
+Unix lecture program assignment
