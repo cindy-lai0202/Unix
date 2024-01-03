@@ -208,17 +208,17 @@ Hint: facecounts would have a '3'
 
 	_______________________________ echo Full house! <= Fill in the blank
 
-# The next line controls whether to print "Straight!" (which means that all of)
-# the cards are sequential). Note that, when you have a straight, you might also
-# have flush -- and that is OK, you script will just print both messages.
-# Further note that, when you have a straight, facecount will be all '1's.
-# Finally, note that there is a special kind of straight that this current line
-# will not catch: the ace-low straight (14, 2, 3, 4, 5).
+The next line controls whether to print "Straight!" (which means that all of)
+the cards are sequential). Note that, when you have a straight, you might also
+have flush -- and that is OK, you script will just print both messages.
+Further note that, when you have a straight, facecount will be all '1's.
+Finally, note that there is a special kind of straight that this current line
+will not catch: the ace-low straight (14, 2, 3, 4, 5).
 
-# So how to do it? First, you will test facecounts to make sure that all of
-# the cards are different, then you will use expr, ``, sort, tail, and head,
-# in order to test whether the value difference between the high card and low
-# the card is 4. In that case, you have a straight.
+So how to do it? First, you will test facecounts to make sure that all of
+the cards are different, then you will use expr, ``, sort, tail, and head,
+in order to test whether the value difference between the high card and low
+the card is 4. In that case, you have a straight.
 # Q: "Do I have to use expr, ``, sort, tail, and head?"  A: "Yes."
 
 	_______________________________ echo Straight! <= Fill in the blank
