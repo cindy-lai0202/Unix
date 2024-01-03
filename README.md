@@ -68,34 +68,35 @@ Line 9:   This line removes any temporary files created by the flushtest script.
 
 Programming Assignment #2
 
-#!/usr/bin/tcsh
-#The line above here will be the first line of your PA2 script. You can change
-#the path, however, if your tcsh file is in a different place.
+	#!/usr/bin/tcsh
+ 
+The line above here will be the first line of your PA2 script. You can change
+the path, however, if your tcsh file is in a different place.
 
-#Your previous programming assignment (PA1) displayed cards and then told you
-#if you had a flush. Now, this new assignment (PA2) will extend that to also
-#print messages for straights and for matching cards (eg three-of-a-kind).
+Your previous programming assignment (PA1) displayed cards and then told you
+if you had a flush. Now, this new assignment (PA2) will extend that to also
+print messages for straights and for matching cards (eg three-of-a-kind).
 
-#In this assignment: only use commands from Lectures 1-4, and don't use any ";".
-#When filling in the blanks indicated below, you may use any piping sequence
-#of commands, and you may use "&&" and "||". So, for example, if you saw:
+In this assignment: only use commands from Lectures 1-4, and don't use any ";".
+When filling in the blanks indicated below, you may use any piping sequence
+of commands, and you may use "&&" and "||". So, for example, if you saw:
 
 	__________________ echo forexample
  
-#Then something must go before the "echo" that would not break UNIX syntax.
-#So it could be "... | echo forexample" or "... | xargs echo forexample" or
-#"... || echo forexample" or "... && echo forexample". (But not "...; echo",
-#because I am not allowing you to use ";" in this programming assignment.
+Then something must go before the "echo" that would not break UNIX syntax.
+So it could be "... | echo forexample" or "... | xargs echo forexample" or
+"... || echo forexample" or "... && echo forexample". (But not "...; echo",
+because I am not allowing you to use ";" in this programming assignment.
 
-#Below, I comment PA1's solution, and I indicate what to add or to change:
+Below, I comment PA1's solution, and I indicate what to add or to change:
 
-#PA1 line #1
-#This was PA2. But for PA2, you must use the first parameter, not $*.
+PA1 line #1
+This was PA2. But for PA2, you must use the first parameter, not $*.
 
           cd ____  <= Your job is to fill in the blank
 
-#PA1 lines #2-6
-#The next 5 lines are the same in PA2 as they were in PA1 (so copy these lines):
+PA1 lines #2-6
+The next 5 lines are the same in PA2 as they were in PA1 (so copy these lines):
 
 	ls ?? | xargs -l fgrep ../allcards -e | cut --complement -c1-2
 	ls ?H 2> /dev/null | wc -l > ___tempfile1
@@ -103,29 +104,29 @@ Programming Assignment #2
 	ls ?D 2> /dev/null | wc -l >> ___tempfile1
 	ls ?S 2> /dev/null | wc -l >> ___tempfile1
 
-#PA1 lines #7-9
-#The next 3 lines printed "Flush!", but they needed a tempfile:
+PA1 lines #7-9
+The next 3 lines printed "Flush!", but they needed a tempfile:
 
 	echo Flush! > ___tempfile2
 	fgrep 5 ___tempfile1 | paste - ___tempfile2 | cut --complement -c1-2 | fgrep F
 	rm ___tempfile?
 
-#In PA2, however, we now know about command coordination with || and &&. This
-#will allow us to only print "Flush!" if there is a "5" in the tempfile. So,
-#on the following line you must achieve printing Flush! using only fgrep & echo:
+In PA2, however, we now know about command coordination with || and &&. This
+will allow us to only print "Flush!" if there is a "5" in the tempfile. So,
+on the following line you must achieve printing Flush! using only fgrep & echo:
 
 	_______________________________ echo Flush!  <= Your job is to fill in the blank
 
-#That is the end of the section that is like PA1. Now for the new behavior:
-#In PA2, we do not only check for flushes (all cards being one suit). We also
-#check for straights (all cards are in sequence), and for matching card faces.
-#For these checks, the suit of the cards does not matter. Therefore, on the
-#next two lines of your answer, you will create a file for just the faces (not
-#the suits). Moreover, the faces of the T, J, Q, K, and A will be converted into
-#the numbers 10, 11, 12, 13, and 14, respectively.
+That is the end of the section that is like PA1. Now for the new behavior:
+In PA2, we do not only check for flushes (all cards being one suit). We also
+check for straights (all cards are in sequence), and for matching card faces.
+For these checks, the suit of the cards does not matter. Therefore, on the
+next two lines of your answer, you will create a file for just the faces (not
+the suits). Moreover, the faces of the T, J, Q, K, and A will be converted into
+the numbers 10, 11, 12, 13, and 14, respectively.
 
-#Not clear? Then consider the following example, where I have already run the
-#two lines to create the faces file:
+Not clear? Then consider the following example, where I have already run the
+two lines to create the faces file:
 
 	% basename `pwd`
 	sample1
@@ -139,31 +140,31 @@ Programming Assignment #2
 	TC      10
 	% 
 
-#Understand? The cards 2-9 display their filenames' first character; the other
-#cards display a number code.
+Understand? The cards 2-9 display their filenames' first character; the other
+cards display a number code.
 
-#As I said above, you will need 2 lines of code to accomplish this. The first
-#line is for all cards from 2 to 9:
+As I said above, you will need 2 lines of code to accomplish this. The first
+line is for all cards from 2 to 9:
 
 	____________________________ > faces   <= Fill in the blank
 
-#The second line is for the ten, jack, queen, king and ace. This line is harder,
-#because the letters for these cards need to be converted to numbers. To make
-#things even harder, these are 2-digit numbers. The solution will need to do two
-#things: 1) Insert a "1" in front of each of these cards, and 2) Convert T to 0,
-#J to 1, Q to 2, K to 3, and A to 4. The harder of these parts is the putting
-#of the "1" in the front, because we can only use commands from lectures 1-4,
-#and that does not give us many ways to put something in from of each line of
-#input. The answer is to use "cat -n" to put a "\t" in front of each line (along
-#with some other things that "cat -n" will insert, but that you can then remove.
+The second line is for the ten, jack, queen, king and ace. This line is harder,
+because the letters for these cards need to be converted to numbers. To make
+things even harder, these are 2-digit numbers. The solution will need to do two
+things: 1) Insert a "1" in front of each of these cards, and 2) Convert T to 0,
+J to 1, Q to 2, K to 3, and A to 4. The harder of these parts is the putting
+of the "1" in the front, because we can only use commands from lectures 1-4,
+and that does not give us many ways to put something in from of each line of
+input. The answer is to use "cat -n" to put a "\t" in front of each line (along
+with some other things that "cat -n" will insert, but that you can then remove.
 
 	____________________________ >> faces  <= Fill in the blank
 
-#Now that we have a list of faces, we can analyze which cards match each other.
-#To this end, we wish to create a file, facecounts, that contains a list of
-#numbers, 1 number per line. If we add these numbers, they always add up to 5.
+Now that we have a list of faces, we can analyze which cards match each other.
+To this end, we wish to create a file, facecounts, that contains a list of
+numbers, 1 number per line. If we add these numbers, they always add up to 5.
 
-#Not clear? Here are all of the cases (in each case line order is unimportant).
+Not clear? Here are all of the cases (in each case line order is unimportant).
 
 If you had:                                  Then facecounts will have:
 
@@ -219,17 +220,18 @@ So how to do it? First, you will test facecounts to make sure that all of
 the cards are different, then you will use expr, ``, sort, tail, and head,
 in order to test whether the value difference between the high card and low
 the card is 4. In that case, you have a straight.
-# Q: "Do I have to use expr, ``, sort, tail, and head?"  A: "Yes."
+
+Q: "Do I have to use expr, ``, sort, tail, and head?"  A: "Yes."
 
 	_______________________________ echo Straight! <= Fill in the blank
 
-#This final line handles the ace-low straight (14, 2, 3, 4, 5). Implement it
-#any way that you want, but only using commands from lectures 1-4 
+This final line handles the ace-low straight (14, 2, 3, 4, 5). Implement it
+any way that you want, but only using commands from lectures 1-4 
 
 	_______________________________ echo Straight! <= Fill in the blank
 	
-#And that is the end of your script. You will notice that there is no output for
-#garbage hands (ie, hands that have no matches or straights or flushes).
+And that is the end of your script. You will notice that there is no output for
+garbage hands (ie, hands that have no matches or straights or flushes).
 
 -------------------------------------------------------------------------------
 Programming Assignment #3、4
@@ -342,25 +344,28 @@ Line 11: end    <= Write this as-is. It ends the loop that you bagan on line 5.
 
 Line 12: echo -n ": " <= Write this as-is.
 
-Line 13: switch ( `_1_ | _2_ | _3_ | _4_` )
-         _1_ Print all of the elements of the array updated on Line 9.
-         _2_ Put each element on its own line.
-         _3_ Sort them so that the bigger numbers are at the top.
-         _4_ Erase all spaces and newlines. This will create one of six cases,
-             which you will deal with as follows:
+Line 13: 
+
+	switch ( `_1_ | _2_ | _3_ | _4_` )
+	         _1_ Print all of the elements of the array updated on Line 9.
+	         _2_ Put each element on its own line.
+	         _3_ Sort them so that the bigger numbers are at the top.
+	         _4_ Erase all spaces and newlines. This will create one of six cases,
+	             which you will deal with as follows:
 
 Lines 14-24: Copy the following lines, as-is:   
-    case 41:
-        echo Four of a kind! ;breaksw
-    case 32:
-        echo Full house! ;breaksw
-    case 311:
-        echo Three of a kind! ;breaksw
-    case 221:
-        echo Two pair! ;breaksw
-    case 2111:
-        echo One pair! ;breaksw
-    case 11111:
+
+	    case 41:
+	        echo Four of a kind! ;breaksw
+	    case 32:
+	        echo Full house! ;breaksw
+	    case 311:
+	        echo Three of a kind! ;breaksw
+	    case 221:
+	        echo Two pair! ;breaksw
+	    case 2111:
+	        echo One pair! ;breaksw
+	    case 11111:
 
 Line 25: To reach this line, the face cards must be all different.
          But there are 4 possible situations for this:
@@ -373,7 +378,9 @@ Line 25: To reach this line, the face cards must be all different.
       
 Line 26:set flush = "" <= Write this as-is.
 
-Line 27: if ( __1__ ) set flush = \ Flush!
+Line 27: 
+
+	if ( __1__ ) set flush = \ Flush!
          Note that this line uses Cshell's 1-line if (that doesn't get a "then")
          The details of __1__ are up to you. Its purpose is to see if there
          is a "5" in the array that you updated on Line 10.
@@ -382,6 +389,7 @@ Line 27: if ( __1__ ) set flush = \ Flush!
                the string "Flush!" is because we must handle straight flushes.
 
 Lines 27-28:
+
         if ( `__1__`  =~ '__2__' ) then
             echo Straight$flush!
             
@@ -405,7 +413,9 @@ Lines 31-33: (Copy these lines as-is)
 
 Line 34: This line must use a foreach, and an seq to count down from 13 to 1. 
 
-Line 35: if ( __1__ ) then
+Line 35:
+
+	if ( __1__ ) then
 
          This line checks array of face values (the one you update on line 9)
          to see if the count down counter has reached a card that you have.
@@ -414,15 +424,17 @@ Lines 36 to end-5: These lines are a switch block to print what the high card's
                    name is. Eg Ace high!, or Queen high, or 10 high!, or 7 high!
 
 Lines end-5 to end: (Copy as-is)
-                    endsw
-                endif
-            end
-        endif
-endsw
+	
+	                    endsw
+	                endif
+	            end
+	        endif
+	endsw
 
-#This final line handles the ace-low straight (14, 2, 3, 4, 5). Implement it
-#any way that you want, but only using commands from lectures 1-4 
-_______________________________ echo Straight! <= Fill in the blank
+This final line handles the ace-low straight (14, 2, 3, 4, 5). Implement it
+any way that you want, but only using commands from lectures 1-4 
+
+	_______________________________ echo Straight! <= Fill in the blank
 
 #And that is the end of your script. You will notice that there is no output for
 #garbage hands (ie, hands that have no matches or straights or flushes).
