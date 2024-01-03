@@ -164,13 +164,13 @@ Programming Assignment #2
 #
 # If you had:                                  Then facecounts will have:
 # ------------------------------------------   -------------------------------
-# 4-of-a-kind (eg 4 fives + 1 side card)       Two lines: a '4' and a '1'
-# 3-of-a-kind (eg 3 tens + 2 side cards)       Three lines: a '3' and two '1'
-# 2-of-a-kind (eg 2 sevens + 3 side cards)     Four lines: a '2' and three '1'
-# 2-pair (eg 2 aces + 2 twos + 1 side card)    Three lines: a '1' and two '2'
-# Full-house (eg 2 fives + 3 kings)            Two lines: a '2' and a '3'
-# No matches (ie, either a flush or garbage)   Five lines: all '1'
-#
+4-of-a-kind (eg 4 fives + 1 side card)       Two lines: a '4' and a '1'
+3-of-a-kind (eg 3 tens + 2 side cards)       Three lines: a '3' and two '1'
+2-of-a-kind (eg 2 sevens + 3 side cards)     Four lines: a '2' and three '1'
+2-pair (eg 2 aces + 2 twos + 1 side card)    Three lines: a '1' and two '2'
+Full-house (eg 2 fives + 3 kings)            Two lines: a '2' and a '3'
+No matches (ie, either a flush or garbage)   Five lines: all '1'
+
 # So put that line here. (Hint: uniq -c)
 
 	____________________________  > facecounts  <= Fill in the blank
@@ -237,21 +237,22 @@ The homework is due in two parts. Lines 1-11 are PA3.
 The second part, Lines 12-end are PA4
 
 Here are some sample runs, assuming that your program works:
-   % ./PA3.csh
-     8♦  6♠  4♣  5♣  7♣: Straight!
-   % ./PA3.csh
-     2♦  2♠  7♠  8♠  J♣: One pair!
-   % ./PA3.csh
-     4♦  5♥  7♥  3♠  6♠: Straight!
-   % ./PA3.csh
-     6♦  10♦  10♥  Q♠  Q♣: Two pair!
-   % ./PA3.csh
-     2♣  4♣  6♣  8♣  Q♣: Flush!
-   % ./PA3.csh
-     3♥  5♥  7♥  2♠  A♠: Ace high!
-   % ./PA3.csh
-     2♦  Q♦  2♠  Q♠  2♣: Full house!
-   %
+
+	   % ./PA3.csh
+	     8♦  6♠  4♣  5♣  7♣: Straight!
+	   % ./PA3.csh
+	     2♦  2♠  7♠  8♠  J♣: One pair!
+	   % ./PA3.csh
+	     4♦  5♥  7♥  3♠  6♠: Straight!
+	   % ./PA3.csh
+	     6♦  10♦  10♥  Q♠  Q♣: Two pair!
+	   % ./PA3.csh
+	     2♣  4♣  6♣  8♣  Q♣: Flush!
+	   % ./PA3.csh
+	     3♥  5♥  7♥  2♠  A♠: Ace high!
+	   % ./PA3.csh
+	     2♦  Q♦  2♠  Q♠  2♣: Full house!
+	   %
 
 There are some rules for the assignment:
 You can never use ";", except with breaksw or exit (ie, ";breaksw" or ";exit").
