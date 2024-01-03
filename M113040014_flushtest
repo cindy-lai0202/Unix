@@ -1,0 +1,9 @@
+cd $*
+ls | xargs -l fgrep ~/PA1/allcards -e | cut --complement -c 1-2
+ls ?S 2>>/dev/null | fgrep S | wc -l >> tempfile
+ls ?D 2>>/dev/null | fgrep D |wc -l >> tempfile
+ls ?H 2>>/dev/null | fgrep H |wc -l >> tempfile
+ls ?C 2>>/dev/null | fgrep C |wc -l >> tempfile
+echo "Flush!" >>flushfile
+fgrep 5 tempfile | paste - ./flushfile | fgrep 5 | cut --complement -c 1-2
+rm tempfile flushfile
