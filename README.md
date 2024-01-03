@@ -91,10 +91,12 @@ Programming Assignment #2
 
 #PA1 line #1
 #This was PA2. But for PA2, you must use the first parameter, not $*.
+
           cd ____  <= Your job is to fill in the blank
 
 #PA1 lines #2-6
 #The next 5 lines are the same in PA2 as they were in PA1 (so copy these lines):
+
 	ls ?? | xargs -l fgrep ../allcards -e | cut --complement -c1-2
 	ls ?H 2> /dev/null | wc -l > ___tempfile1
 	ls ?C 2> /dev/null | wc -l >> ___tempfile1
@@ -103,6 +105,7 @@ Programming Assignment #2
 
 #PA1 lines #7-9
 #The next 3 lines printed "Flush!", but they needed a tempfile:
+
 	echo Flush! > ___tempfile2
 	fgrep 5 ___tempfile1 | paste - ___tempfile2 | cut --complement -c1-2 | fgrep F
 	rm ___tempfile?
@@ -164,12 +167,13 @@ Programming Assignment #2
 #
 # If you had:                                  Then facecounts will have:
 # ------------------------------------------   -------------------------------
-4-of-a-kind (eg 4 fives + 1 side card)       Two lines: a '4' and a '1'
-3-of-a-kind (eg 3 tens + 2 side cards)       Three lines: a '3' and two '1'
-2-of-a-kind (eg 2 sevens + 3 side cards)     Four lines: a '2' and three '1'
-2-pair (eg 2 aces + 2 twos + 1 side card)    Three lines: a '1' and two '2'
-Full-house (eg 2 fives + 3 kings)            Two lines: a '2' and a '3'
-No matches (ie, either a flush or garbage)   Five lines: all '1'
+
+	4-of-a-kind (eg 4 fives + 1 side card)       Two lines: a '4' and a '1'
+	3-of-a-kind (eg 3 tens + 2 side cards)       Three lines: a '3' and two '1'
+	2-of-a-kind (eg 2 sevens + 3 side cards)     Four lines: a '2' and three '1'
+	2-pair (eg 2 aces + 2 twos + 1 side card)    Three lines: a '1' and two '2'
+	Full-house (eg 2 fives + 3 kings)            Two lines: a '2' and a '3'
+	No matches (ie, either a flush or garbage)   Five lines: all '1'
 
 # So put that line here. (Hint: uniq -c)
 
@@ -211,7 +215,7 @@ No matches (ie, either a flush or garbage)   Five lines: all '1'
 # Further note that, when you have a straight, facecount will be all '1's.
 # Finally, note that there is a special kind of straight that this current line
 # will not catch: the ace-low straight (14, 2, 3, 4, 5).
-#
+
 # So how to do it? First, you will test facecounts to make sure that all of
 # the cards are different, then you will use expr, ``, sort, tail, and head,
 # in order to test whether the value difference between the high card and low
